@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%  block content %}
+
+
+<section id="tasks">
+    <div class="tasks text-align-center row desktop-8 padding-bottom-2 container">
+        <p class="lead">A minimalist app to exemplify the usage of <a>EasyTest</a> to facilitate the creation of unit tests with Django.</p>
+        <!--<h2>Tasks</h2>-->
+        {% for task in task_list %}
+        <div class="desktop-3 task">
+            <a class="icon-delete" href="{{ task.get_delete_url }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <h4><a href="{{ task.get_absolute_url }}">{{ task.name }}</a></h4>
+            <p>{{ task.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock content %}

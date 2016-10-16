@@ -1,0 +1,17 @@
+<header class="header header-inline min-h-3 row desktop-12 container" role="banner">
+
+    <div class="site-logo">
+        <h1><a href="{% url 'home' %}" rel="home">Tasks</a></h1>
+        <p class="site-description screen-reader-only">A unit test framework for Django that will make your unit tests as easy as it should be.</p>
+    </div>
+
+    <nav class="nav-inline" role="navigation">
+        <a href="javascript:void(0);" class="nav-mobile"><i class="fa fa-bars"></i></a>
+        <ul>
+            <li><a data-scroll href="{% url 'home' %}#overview">Home</a></li>
+            <li><a data-scroll href="{% url 'task_new' %}">New</a></li>
+
+        </ul>
+    </nav>
+
+</header>
