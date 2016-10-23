@@ -11,10 +11,10 @@ class BaseMeta(type):
         # Ensure initialization is only performed for subclasses of Meta
         parents = [b for b in bases if isinstance(b, BaseMeta)]
         if not parents:
-            return super_new(cls, name, bases, attrs)
+            new_class = super_new(cls, name, bases, attrs)
+            setattr(new_class, '_concrete', False)
+            return new_class
 
-
-        print ('Parent')
         # Create the class.
         module = attrs.pop('__module__')
         new_class = super_new(cls, name, bases, {'__module__': module})
@@ -23,7 +23,7 @@ class BaseMeta(type):
             meta = getattr(new_class, 'Meta', None)
         else:
             meta = attr_meta
-
+        setattr(new_class, '_concrete', True)
         setattr(new_class, '_meta', Options(meta))
 
         cls.validate(cls, new_class._meta, module, name)

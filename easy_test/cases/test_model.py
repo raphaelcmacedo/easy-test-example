@@ -6,12 +6,18 @@ from easy_test.util import contains_option
 
 class ModelTest(TestCase, metaclass=ModelMeta):
     def setUp(self):
+        if not self._concrete:
+            return
         self.obj = self._meta.obj.save()
 
     def test_create(self):
+        if not self._concrete:
+            return
         self.assertTrue(self._meta.model.objects.exists())
 
     def test_blank(self):
+        if not self._concrete:
+            return
         if not contains_option(self._meta, 'blank_fields'):
             return
         blank_fields = self._meta.blank_fields
