@@ -1,5 +1,6 @@
 from django.test import TestCase
 
+from easy_test.cases.test_model import ModelTest
 from easy_test_example.core.models import Task
 
 
@@ -22,4 +23,12 @@ class TaskModelTest(TestCase):
 
     def test_ordering(self):
         self.assertListEqual(['-created_at'], list(Task._meta.ordering))
-        
+
+
+class TaskModelEasyTest(ModelTest):
+    class Meta:
+        obj = Task(
+            name='Easy Test',
+            description='A unit test framework for Django that will make your unit tests as easy as it should be.',
+        )
+        blank_fields = 'description'
