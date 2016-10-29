@@ -11,3 +11,12 @@ class Options(object):
         if contains_option(meta, 'blank_fields'):
             self.blank_fields = meta.blank_fields
 
+        if contains_option(meta, 'none_fields'):
+            self.none_fields = meta.none_fields
+
+        if contains_option(meta, 'string'):
+            self.string = meta.string
+
+        if contains_option(meta, 'ordering'):
+            self.ordering = meta.ordering
+

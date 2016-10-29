@@ -29,6 +29,8 @@ class TaskModelEasyTest(ModelTest):
     class Meta:
         obj = Task(
             name='Easy Test',
-            description='A unit test framework for Django that will make your unit tests as easy as it should be.',
+            description='A unit test framework for Django that will make your unit tests as easy as it should be.'
         )
         blank_fields = 'description'
+        string = 'Easy Test'
+        ordering = ['-created_at']

@@ -16,3 +16,19 @@ class ModelMeta(BaseMeta):
                     "Test class %s.%s doesn't set blank_fields as a sequence "
                     "instance." % (module, name)
                 )
+
+        # none_fields
+        if contains_option(meta, 'none_fields'):
+            if not isinstance(meta.none_fields, collections.Sequence):
+                raise RuntimeError(
+                    "Test class %s.%s doesn't set none_fields as a sequence "
+                    "instance." % (module, name)
+                )
+
+        # ordering
+        if contains_option(meta, 'ordering'):
+            if not isinstance(meta.ordering, list):
+                raise RuntimeError(
+                    "Test class %s.%s doesn't set ordering as a list "
+                    "instance." % (module, name)
+                )

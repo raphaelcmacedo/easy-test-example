@@ -16,8 +16,8 @@ An example of easy text https://github.com:raphaelcmacedo/easy-test
 ```console
 git clone git@github.com:raphaelcmacedo/easy-test-example.git easy_test_example
 cd easy_test_example
-python -m venv .wttd
-source .wttd/bin/activate
+python -m venv .ete
+source .ete/bin/activate
 pip install -r requirements-dev.txt
 cp contrib/env-sample .env
 python manage.py test
