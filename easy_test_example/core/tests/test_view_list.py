@@ -1,8 +1,7 @@
 from django.shortcuts import resolve_url
 from django.test import TestCase
 
-from easy_test.cases.test_html import HtmlTest
-from easy_test.util import HttpMethods
+from easy_test.cases.test_html import GetTest
 from easy_test_example.core.models import Task
 
 
@@ -41,13 +40,13 @@ class ListGet(TestCase):
                 self.assertIn(key, self.response.context)
 
 
-class ListGetEasyTest(HtmlTest):
+class ListGetEasyTest(GetTest):
     class Meta:
         obj = Task(
             name='Easy Test',
             description='A unit test framework for Django that will make your unit tests as easy as it should be.'
         )
-        url = resolve_url('home')
+        url = 'home'
         template = 'index.html'
         contents = [
             'Tasks',

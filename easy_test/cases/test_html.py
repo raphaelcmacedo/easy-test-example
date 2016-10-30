@@ -1,73 +1,30 @@
+from django.shortcuts import resolve_url
 from django.test import TestCase
 
 from easy_test.metas.meta_html import HtmlMeta
-from easy_test.util import contains_option, HttpMethods
+from easy_test.mixins.mixin_html import HtmlMixin
+from easy_test.util import contains_option
 
 
-class HtmlTest(TestCase, metaclass=HtmlMeta):
+class GetTest(TestCase,HtmlMixin, metaclass=HtmlMeta):
     def setUp(self):
         if not self._concrete:
             return
-        self.obj = self._meta.obj.save()
 
-        method = HttpMethods.GET
-        if contains_option(self._meta, 'method'):
-            method = self._meta.method
+        self._meta.obj.save()
+        self.status_code = 200
 
-        if method == HttpMethods.GET:
-            self.response = self.client.get(self._meta.url)
-        elif method == HttpMethods.POST:
-            self.response = self.client.post(self._meta.url)
-        elif method == HttpMethods.PUT:
-            self.response = self.client.put(self._meta.url)
-        elif method == HttpMethods.DELETE:
-            self.response = self.client.delete(self._meta.url)
-
-    def test_status_code(self):
-        if not self._concrete:
-            return
-
-        status_code = 200
-        if contains_option(self._meta, 'status_code'):
-            status_code = self._meta.status_code
-
-        self.assertEqual(status_code, self.response.status_code)
-
-    def test_template(self):
-        if not self._concrete:
-            return
-        if not contains_option(self._meta, 'template'):
-            return
-
-        template = self._meta.template
-        self.assertTemplateUsed(self.response, template)
-
-    def test_content(self):
-        if not self._concrete:
-            return
-        if not contains_option(self._meta, 'contents'):
-            return
-        contents = self._meta.contents
-
-        # Verify if was informed one or more fields
-        if isinstance(contents, str):
-            self.assertContains(self.response, contents)
+        if contains_option(self._meta, 'url_arg_field'):
+            arg = getattr(self._meta.obj, self._meta.url_arg_field, '')
+            self.response = self.client.get(resolve_url(self._meta.url,arg))
         else:
-            for content in contents:
-                with self.subTest():
-                    self.assertContains(self.response, content)
-                    
-    def test_context(self):
+            self.response = self.client.get(resolve_url(self._meta.url))
+
+    def test_not_found(self):
         if not self._concrete:
             return
-        if not contains_option(self._meta, 'context_variables'):
-            return
-        variables = self._meta.context_variables
+        if contains_option(self._meta, 'url_arg_field'):
+            self.response = self.client.get(resolve_url(self._meta.url, 0))
+            self.assertEqual(self.response.status_code, 404)
 
-        # Verify if was informed one or more fields
-        if isinstance(variables, str):
-            self.assertIn(variables, self.response.context)
-        else:
-            for variable in variables:
-                with self.subTest():
-                    self.assertIn(variable, self.response.context)
+
