@@ -20,3 +20,21 @@ class Options(object):
         if contains_option(meta, 'ordering'):
             self.ordering = meta.ordering
 
+        #HtmlList
+        if contains_option(meta, 'url'):
+            self.url = meta.url
+
+        if contains_option(meta, 'method'):
+            self.method = meta.method
+
+        if contains_option(meta, 'status_code'):
+            self.status_code = meta.status_code
+
+        if contains_option(meta, 'template'):
+            self.template = meta.template
+
+        if contains_option(meta, 'contents'):
+            self.contents = meta.contents
+
+        if contains_option(meta, 'context_variables'):
+            self.context_variables = meta.context_variables

@@ -1,10 +1,12 @@
 from django.shortcuts import resolve_url
 from django.test import TestCase
 
+from easy_test.cases.test_html import HtmlTest
+from easy_test.util import HttpMethods
 from easy_test_example.core.models import Task
 
 
-class HomeGet(TestCase):
+class ListGet(TestCase):
     def setUp(self):
         self.task = Task.objects.create(
             name = 'Easy Test',
@@ -37,4 +39,20 @@ class HomeGet(TestCase):
         for key in variables:
             with self.subTest():
                 self.assertIn(key, self.response.context)
+
+
+class ListGetEasyTest(HtmlTest):
+    class Meta:
+        obj = Task(
+            name='Easy Test',
+            description='A unit test framework for Django that will make your unit tests as easy as it should be.'
+        )
+        url = resolve_url('home')
+        template = 'index.html'
+        contents = [
+            'Tasks',
+            'Easy Test',
+            'A unit test framework for Django that will make your unit tests as easy as it should be.'
+        ]
+        context_variables = ['task_list']
 
