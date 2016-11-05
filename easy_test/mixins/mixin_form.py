@@ -28,15 +28,6 @@ class InvalidFormMixin():
 
 
 class FormMixin(ValidFormMixin, InvalidFormMixin, HtmlMixin):
-    def test_csrf(self):
-        if not self._concrete:
-            return
-
-        if self._meta.ignore_csrfmiddlewaretoken:
-            return
-
-        self.assertContains(self.response, 'csrfmiddlewaretoken')
-
     def test_has_form(self):
         if not self._concrete:
             return

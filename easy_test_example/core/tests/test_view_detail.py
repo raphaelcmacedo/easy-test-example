@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url
 
-from easy_test.cases.test_html import GetTest
+from easy_test.cases.test_html import HtmlTest
 from easy_test_example.core.models import Task
 
 
@@ -39,7 +39,7 @@ class TaskDetailNotFound(TestCase):
     def test_not_found(self):
         self.assertEqual(self.response.status_code, 404)
 
-class TaskDetailGetEasyTest(GetTest):
+class TaskDetailGetEasyTest(HtmlTest):
     class Meta:
         obj = Task(
             name='Easy Test',

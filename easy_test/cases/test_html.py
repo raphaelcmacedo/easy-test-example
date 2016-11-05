@@ -6,7 +6,7 @@ from easy_test.mixins.mixin_html import HtmlMixin
 from easy_test.util import contains_option
 
 
-class GetTest(TestCase,HtmlMixin, metaclass=HtmlMeta):
+class HtmlTest(TestCase,HtmlMixin, metaclass=HtmlMeta):
     def setUp(self):
         if not self._concrete:
             return

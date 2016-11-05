@@ -78,4 +78,3 @@ class TaskFormEasyTest(FormTest):
             ('type="submit"', 1)
         ]
         form = TaskForm
-        #ignore_form_errors = True

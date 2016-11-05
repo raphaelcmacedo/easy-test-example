@@ -65,3 +65,11 @@ class HtmlMixin():
         variable = self.response.context[context_model_variable]
         self.assertIsInstance(variable, self._meta.model)
 
+    def test_csrf(self):
+        if not self._concrete:
+            return
+
+        if self._meta.ignore_csrfmiddlewaretoken:
+            return
+
+        self.assertContains(self.response, 'csrfmiddlewaretoken')

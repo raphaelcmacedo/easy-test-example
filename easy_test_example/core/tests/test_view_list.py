@@ -1,7 +1,7 @@
 from django.shortcuts import resolve_url
 from django.test import TestCase
 
-from easy_test.cases.test_html import GetTest
+from easy_test.cases.test_html import HtmlTest
 from easy_test_example.core.models import Task
 
 
@@ -40,7 +40,7 @@ class ListGet(TestCase):
                 self.assertIn(key, self.response.context)
 
 
-class ListGetEasyTest(GetTest):
+class ListGetEasyTest(HtmlTest):
     class Meta:
         obj = Task(
             name='Easy Test',
@@ -54,4 +54,5 @@ class ListGetEasyTest(GetTest):
             'A unit test framework for Django that will make your unit tests as easy as it should be.'
         ]
         context_variables = ['task_list']
+        ignore_csrfmiddlewaretoken = True
 
