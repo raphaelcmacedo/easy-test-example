@@ -23,10 +23,16 @@ class HtmlMixin():
         if not contains_option(self._meta, 'contents'):
             return
         contents = self._meta.contents
+        if len(contents) <= 0:
+            return
 
         # Verify if was informed one or more fields
         if isinstance(contents, str):
             self.assertContains(self.response, contents)
+        elif isinstance(contents[0], tuple):
+            for content, count in contents:
+                with self.subTest():
+                    self.assertContains(self.response, content, count)
         else:
             for content in contents:
                 with self.subTest():

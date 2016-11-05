@@ -2,6 +2,7 @@ from django.core import mail
 from django.shortcuts import resolve_url
 from django.test import TestCase
 
+from easy_test.cases.test_form import FormTest
 from easy_test_example.core.forms import TaskForm
 from easy_test_example.core.models import Task
 
@@ -60,3 +61,21 @@ class TaskNewPostInvalid(TestCase):
 
     def test_not_save_subscription(self):
         self.assertFalse(Task.objects.exists())
+
+class TaskFormEasyTest(FormTest):
+    class Meta:
+        obj = Task(
+            name='Easy Test',
+            description='A unit test framework for Django that will make your unit tests as easy as it should be.'
+        )
+        url = 'task_new'
+        template = 'core/task_form.html'
+        contents = [
+            ('<form',1),
+            ('<input', 3),
+            ('<textarea', 1),
+            ('type="text"', 1),
+            ('type="submit"', 1)
+        ]
+        form = TaskForm
+        #ignore_form_errors = True

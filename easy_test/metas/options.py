@@ -20,7 +20,7 @@ class Options(object):
         if contains_option(meta, 'ordering'):
             self.ordering = meta.ordering
 
-        #HtmlList
+        #HtmlTest
         if contains_option(meta, 'url'):
             self.url = meta.url
 
@@ -38,3 +38,17 @@ class Options(object):
 
         if contains_option(meta, 'context_model_variable'):
             self.context_model_variable = meta.context_model_variable
+
+        #FormTest
+        if contains_option(meta, 'form'):
+            self.form = meta.form
+
+        if contains_option(meta, 'ignore_csrfmiddlewaretoken'):
+            self.ignore_csrfmiddlewaretoken = meta.ignore_csrfmiddlewaretoken
+        else:
+            self.ignore_csrfmiddlewaretoken = False
+
+        if contains_option(meta, 'ignore_form_errors'):
+            self.ignore_form_errors = meta.ignore_form_errors
+        else:
+            self.ignore_form_errors = False
