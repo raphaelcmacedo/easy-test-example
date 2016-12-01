@@ -1,11 +1,10 @@
 from django.core import mail
 from django.shortcuts import resolve_url
 from django.test import TestCase
-
 from easy_test.cases.test_form import FormTest
+
 from easy_test_example.core.forms import TaskForm
 from easy_test_example.core.models import Task
-
 
 class TaskNewGet(TestCase):
     def setUp(self):
