@@ -19,7 +19,7 @@ cd easy_test_example
 python -m venv .ete
 source .ete/bin/activate
 pip install -r requirements-dev.txt
-cp contrib/env-sample .env
+cp easy_test_example/contrib/env-sample .env
 python manage.py test
 ```
 
