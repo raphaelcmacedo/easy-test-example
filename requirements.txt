@@ -8,3 +8,4 @@ psycopg2==2.6.1
 django_extensions==1.6.1
 django_test_without_migrations==0.4
 pytz
+django-easy-test
